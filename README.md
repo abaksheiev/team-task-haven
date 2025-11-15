@@ -3,8 +3,8 @@
 Project idea: Team Task Manager
 
 Recommended stack: Node.js, Nest.js, GraphQL, PostgreSQL, WebSocket
-
-#Structura
+# Structura
+```
 Frontend (React)
         |
         v
@@ -18,3 +18,4 @@ Repository (access to DB)
         |
         v
 Database (PostgreSQL)
+```
