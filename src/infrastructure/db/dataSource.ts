@@ -27,7 +27,7 @@ export const AppDataSource = new DataSource({
   //  ListEntity,
   //  AttachmentEntity,
   //  CommentEntity,
-  //  ActivityEntity
+  //  ActivityEntity,
   ],
   migrations: ["src/infrastructure/db/migrations/*.ts"],
 });

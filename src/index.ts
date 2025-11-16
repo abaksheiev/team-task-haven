@@ -1,6 +1,6 @@
 // src/index.ts
 import express from "express";
-import router from "./infrastructure/rest/routes";
+import router from "./infrastructure/rest/routes/routes";
 import { initDb } from "./infrastructure/db/init";
 
 const app = express();
