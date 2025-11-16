@@ -1,5 +1,6 @@
+/*
 import { List } from "./List";
-import { Team } from "./Team";
+import { Team } from "./teams/Team";
 
 export class Board {
     constructor(
@@ -8,4 +9,4 @@ export class Board {
         public team: Team,
         public lists: List[] = []
     ) {}
-}
+}*/

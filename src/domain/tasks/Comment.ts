@@ -1,4 +1,4 @@
-import { User } from "./User";
+import { User } from "../teams/User";
 
 export class Comment {
     constructor(

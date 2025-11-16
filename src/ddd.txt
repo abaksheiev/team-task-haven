@@ -1,0 +1,59 @@
+1. Identify the Domain and Subdomains
+From your classes, I can see a few natural subdomains:
+
+Collaboration / Boards: Board, List
+Task Management: Task, Attachment, Comment
+Team & Users: Team, User
+Activity Tracking / Audit: Activity
+With DDD, each of these subdomains could become its own bounded context.
+
+2. Define Entities, Value Objects, and Aggregates
+Entities
+
+Must have an identity (id), change over time.
+Examples:
+User, Team, Task, Board, Activity.
+Value Objects
+
+No identity, equality by value, immutable.
+Could include:
+Attachment (could be a VO if you don’t persist separately).
+DueDate (instead of using Date directly).
+TaskTitle, CommentText.
+Aggregates
+
+Cluster of entities with a single root.
+Examples:
+Board aggregate: Board → Lists → Tasks.
+Task aggregate: Task → Comments, Attachments.
+Team aggregate: Team → Members.
+
+3. Add Domain Logic to the Models
+Anemic models just hold data, but DDD encourages behaviors inside entities:
+
+4. Separate Infrastructure and Application Layers
+In DDD:
+
+Domain Layer — pure business logic, doesn’t depend on frameworks.
+Application Layer — services orchestrating domain operations (e.g., TaskApplicationService).
+Infrastructure Layer — DB repositories, APIs.
+Example repo interface:
+
+export interface TaskRepository {
+    findById(id: TaskId): Promise<Task>;
+    save(task: Task): Promise<void>;
+}
+
+5. Events
+DDD often uses domain events:
+
+export class TaskCompleted {
+    constructor(public readonly taskId: TaskId, public readonly completedAt: Date) {}
+}
+
+Your current classes are good starting points for a domain layer, but in DDD you’d:
+
+Split them into entities vs value objects.
+Group related ones as aggregates with rules enforced in methods.
+Define repositories, domain services, and events.
+Keep the domain layer free from infrastructure details.

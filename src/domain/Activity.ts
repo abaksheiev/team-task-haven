@@ -1,3 +1,4 @@
+/*
 import { Task } from "./Task";
 import { User } from "./User";
 
@@ -9,4 +10,4 @@ export class Activity {
         public task: Task,
         public createdAt: Date = new Date()
     ) {}
-}
+}*/

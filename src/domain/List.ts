@@ -1,3 +1,4 @@
+/*
 import { Task } from "./Task";
 
 export class List {
@@ -7,3 +8,4 @@ export class List {
         public tasks: Task[] = []
     ) {}
 }
+*/
