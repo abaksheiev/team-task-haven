@@ -1,8 +1,11 @@
-// src/infrastructure/rest/routes.ts
+import "reflect-metadata";  // <- обязательно первой строкой
+
 import express from "express";
-import { getAllUsers } from "../UserController";
+import { container } from "tsyringe";
+import { UserController } from "../UserController";
 
 const router = express.Router();
+const userController = container.resolve(UserController);
 
 /**
  * @openapi
@@ -13,6 +16,6 @@ const router = express.Router();
  *       200:
  *         description: A list of users
  */
-router.get("/users", getAllUsers);
+router.get("/users", (req, res) => userController.getAllUsers(req, res));
 
 export default router;

@@ -241,3 +241,21 @@ Value Objects enforce invariants (e.g., valid task titles, a valid due date).
 Repositories abstract persistence — domain doesn’t care about DB details.
 Application Services coordinate use cases; domain layer stays pure.
 Domain Events handle tracking & auditing (Activity).
+
+
+```
+src/
+  domain/
+    IUserRepository.ts
+    IUserService.ts  <- интерфейсы
+  application/
+    UserService.ts   <- реализация сервиса
+  infrastructure/
+    db/
+      TypeOrmUserRepository.ts
+    rest/
+      UserController.ts
+      routes.ts
+    di/
+      container.ts
+```

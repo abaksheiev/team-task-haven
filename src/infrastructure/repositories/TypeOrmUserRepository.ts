@@ -1,10 +1,12 @@
-// src/infrastructure/repositories/TypeOrmUserRepository.ts
+import { injectable } from "tsyringe";
 import { IUserRepository } from "../../domain/teams/IUserRepository";
 import { User } from "../../domain/teams/User";
 import { AppDataSource } from "../db/dataSource";
 import { UserEntity } from "../db/entities/UserEntity";
 import { UserId } from "../../domain/teams/UserId";
 
+
+@injectable()
 export class TypeOrmUserRepository implements IUserRepository 
 { 
     async findAll(): Promise<User[]> {
@@ -14,3 +16,5 @@ export class TypeOrmUserRepository implements IUserRepository
         return rows.map(row => new User(new UserId(row.id), row.username, row.email, row.avatarUrl));
   }
 }
+
+ 

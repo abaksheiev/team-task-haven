@@ -1,8 +1,10 @@
 // src/index.ts
 import express from "express";
+import "./infrastructure/di/container"; 
 import router from "./infrastructure/rest/routes/routes";
 import { initDb } from "./infrastructure/db/init";
 import { setupSwagger } from "./infrastructure/rest/swaggers/swagger"
+import "reflect-metadata";
 
 const app = express();
 
