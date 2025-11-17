@@ -5,13 +5,13 @@ import { getAllUsers } from "../UserController";
 const router = express.Router();
 
 /**
- * @swagger
+ * @openapi
  * /users:
  *   get:
  *     summary: Get all users
  *     responses:
  *       200:
- *         description: List of users
+ *         description: A list of users
  */
 router.get("/users", getAllUsers);
 

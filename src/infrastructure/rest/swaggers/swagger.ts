@@ -1,5 +1,8 @@
 import path from 'path';
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
+
 export const swaggerOptions = {
   swaggerDefinition: {
     openapi: '3.0.0',
@@ -15,4 +18,10 @@ export const swaggerOptions = {
     ],
   },
   apis: [path.resolve(__dirname, '../routes/*.ts')] // Path to files with Swagger comments
+};
+
+export const swaggerSpec = swaggerJsDoc(swaggerOptions);
+
+export const setupSwagger = (app: any) => {
+  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 };
