@@ -11,7 +11,7 @@ import { UserEntity } from "./entities/UserEntity";
 //import { ActivityEntity } from "./entities/ActivityEntity";
 
 export const AppDataSource = new DataSource({
-  type: "postgres", // or "mysql", "sqlite", etc.
+  type: "postgres",
   host: process.env.DB_HOST ?? "localhost",
   port: Number(process.env.DB_PORT ?? 5432),
   username: process.env.DB_USER ?? "postgres",

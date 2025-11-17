@@ -5,5 +5,6 @@ export interface DomainEvent {
 
 export class TaskCompleted implements DomainEvent {
   occurredOn: Date = new Date();
+  
   constructor(public readonly taskId: number) {}
 }

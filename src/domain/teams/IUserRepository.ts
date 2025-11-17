@@ -1,6 +1,6 @@
 // src/domain/teams/UserRepository.ts
 import { User } from "./User";
 
-export interface UserRepository {
+export interface IUserRepository {
   findAll(): Promise<User[]>;
 }
