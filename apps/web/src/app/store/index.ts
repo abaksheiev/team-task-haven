@@ -1,0 +1,1 @@
+//  # глобальный store Redux/Zustand/Recoil

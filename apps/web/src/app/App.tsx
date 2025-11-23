@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route, NavLink} from 'react-router';
-import DashboardPage from './Dashboard/DashboardPage';
-import ProfilePage from './Profile/ProfilePage';
-import TaskDetailsPage from './TaskDetails/TaskDetailsPage';
-import TaskListPage from './TaskList/TaskListPage';
+import DashboardPage from '../modules/dashboard/pages/DashboardPage';
+import ProfilePage from '../modules/profile/pages/ProfilePage';
+import TaskDetailsPage from '../modules/tasks/pages/TaskDetailsPage';
+import TaskListPage from '../modules/tasks/pages/TaskListPage';
 
 function App() {
  return (
@@ -13,10 +13,10 @@ function App() {
            Dashboard
          </NavLink>
          <NavLink to="/taskList" className="button rounded">
-           Tasks
+          <span className='icon-search'></span>  Tasks
          </NavLink>
          <NavLink to="/profile" className="button rounded">
-           Profile
+          <span className="icon-user"></span> Profile
          </NavLink>
        </header>
       <div className="container">
