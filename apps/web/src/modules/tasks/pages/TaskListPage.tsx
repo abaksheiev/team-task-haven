@@ -1,6 +1,6 @@
 import { useTasks } from "../hooks/useTasks";
 
-export function TaskListPage() {
+export default function TaskListPage() {
   const { tasks, loading, error, refresh } = useTasks();
 
   if (loading) return <p>Loading tasks…</p>;

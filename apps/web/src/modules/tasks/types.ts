@@ -5,4 +5,5 @@ export interface Task {
   dueDate?: string; // ISO string
   isCompleted: boolean;
   assignees: { id: string; username: string }[];
+  status : string
 }
