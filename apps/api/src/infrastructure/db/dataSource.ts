@@ -3,7 +3,7 @@ import "reflect-metadata";
 import { DataSource } from "typeorm";
 import { UserEntity } from "./entities/UserEntity";
 //import { TeamEntity } from "./entities/TeamEntity";
-//import { TaskEntity } from "./entities/TaskEntity";
+import { TaskEntity } from "./entities/TaskEntity";
 //import { BoardEntity } from "./entities/BoardEntity";
 //import { ListEntity } from "./entities/ListEntity";
 //import { AttachmentEntity } from "./entities/AttachmentEntity";
@@ -22,7 +22,7 @@ export const AppDataSource = new DataSource({
   entities: [
     UserEntity,
   //  TeamEntity,
-  //  TaskEntity,
+     TaskEntity,
   //  BoardEntity,
   //  ListEntity,
   //  AttachmentEntity,

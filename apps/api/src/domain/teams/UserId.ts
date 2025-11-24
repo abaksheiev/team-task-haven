@@ -1,9 +1,9 @@
 export class UserId{
-    constructor(private readonly value:number){}
+    constructor(private readonly value:string | null){}
     /**
      * Get the raw primitive value (number) for this ID.
      */
-    getValue(): number {
+    getValue(): string | null {
         return this.value;
     }
 
@@ -14,7 +14,11 @@ export class UserId{
         return this.value === other.value;
     }
 
-    toString(): string {
+    toString(): string | null {
+
+        if(this.value == null)
+            return null;
+
         return this.value.toString();
     }
 }

@@ -10,19 +10,16 @@ export class Task {
   constructor(
     private id: TaskId,
     private title: TaskTitle,
-    private description?: string,
-    private assignees: UserId[] = [],
+    private description: string,
+    private status: number,
+    private assignee: UserId ,
     //private dueDate?: DueDate,
     private isCompleted: boolean = false,
     private comments: Comment[] = [],
     //private attachments: Attachment[] = []
   ) {}
 
-  assignTo(userId: UserId) {
-    if (!this.assignees.find(u => u.equals(userId))) {
-      this.assignees.push(userId);
-    }
-  }
+  
 
   addComment(comment: Comment) {
     this.comments.push(comment);
@@ -40,5 +37,30 @@ export class Task {
 */
   getId(): TaskId {
     return this.id;
+  }
+
+  getTitle():string{
+    return this.title.toString()
+  }
+
+  getDescription():string{
+    return this.description
+  }
+
+  getStatus(): string {
+    const statusNum = Number(this.status);
+
+    switch (statusNum) {
+      case 1:
+        return "Todo";
+      case 2:
+        return "In Progress";
+      case 3:
+        return "In Review";
+      case 4:
+        return "Done";
+      default:
+        return "";
+    }
   }
 }

@@ -4,6 +4,7 @@ import TaskCard from "../components/TaskCard";
 const columns = [
   { key: "Todo", title: "To Do" },
   { key: "In Progress", title: "In Progress" },
+  { key: "In Review", title: "In Review" },
   { key: "Done", title: "Done" }
 ];
 
@@ -27,7 +28,7 @@ export default function DashboardPage() {
         >
           <h3>{col.title}</h3>
           {tasksByStatus[col.key]?.map(task => (
-            <TaskCard task={task}></TaskCard>
+            <TaskCard key={task.id} task={task}></TaskCard>
           ))}
         </div>
       ))}

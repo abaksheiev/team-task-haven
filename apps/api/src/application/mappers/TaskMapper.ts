@@ -1,0 +1,21 @@
+// src/application/mappers/UserMapper.ts
+import { time } from "console";
+import { Task } from "../../domain/tasks/Task";
+import { User } from "../../domain/teams/User";
+import { UserDto } from "../dtos/UserDto";
+import { TaskDto } from "../dtos/TaskDto";
+
+export class TaskMapper {
+    static toDto(task: Task): TaskDto {
+        return {
+            id: `${task.getId().getValue()}` ,
+            title: task.getTitle(),
+            description: task.getDescription(),
+            status: task.getStatus()
+        };
+    }
+
+    static toDtoList(users: Task[]): TaskDto[] {
+        return users.map(TaskMapper.toDto);
+    }
+}

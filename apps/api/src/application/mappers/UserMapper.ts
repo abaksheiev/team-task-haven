@@ -5,7 +5,7 @@ import { UserDto } from "../dtos/UserDto";
 export class UserMapper {
     static toDto(user: User): UserDto {
         return {
-            id: user.getId().getValue().toString(),
+            id: `${user.getId().getValue()}`,
             username: user.getUsername(),
             email: user.getEmail(),
             //avatarUrl: user.getAvatarUrl()
