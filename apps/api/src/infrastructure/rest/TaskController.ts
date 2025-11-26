@@ -24,27 +24,7 @@ export class TaskController {
         return;
       }
 
-     let statusNum = 1;
-
-    switch (`${status}`) {
-      case "Todo" :
-        statusNum = 1;
-        break;
-      case "In Progress":
-         statusNum = 2;
-         break;
-      case "In Review":
-         statusNum = 3;
-         break;
-      case "Done":
-         statusNum = 4;
-         break;
-      default:
-        console.log("Unknown status")
-        break; "";
-    }
- 
-      const updatedTask = await this.taskService.updateTaskStatus(id, statusNum);
+      const updatedTask = await this.taskService.updateTaskStatus(id, status);
 
       res.json(TaskMapper.toDto(updatedTask));
 

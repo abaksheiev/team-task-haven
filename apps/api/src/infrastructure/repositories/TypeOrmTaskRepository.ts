@@ -6,6 +6,7 @@ import { TaskId } from "../../domain/tasks/TaskId";
 import { TaskTitle } from "../../domain/tasks/TaskTitle";
 import { UserId } from "../../domain/teams/UserId";
 import { ITaskRepository } from "../../domain/tasks/ITaskRepository";
+import { TaskStatus } from "../../domain/tasks/TaskStatus";
 
 
 @injectable()
@@ -22,7 +23,7 @@ export class TypeOrmTaskRepository implements ITaskRepository
             new TaskId(row.id),
             new TaskTitle(row.title),
             row.description,
-            row.status,
+            new TaskStatus(row.status),
             new UserId(row.assigneeId) 
         );
     }
@@ -33,7 +34,7 @@ export class TypeOrmTaskRepository implements ITaskRepository
             id: task.getId().getValue()?.toString(),
             title: task.getTitle(),
             description: task.getDescription(),
-            status: task.getStatusValue() 
+            status: task.status.value 
         });
         await repo.save(entity);
     } 
@@ -44,25 +45,8 @@ export class TypeOrmTaskRepository implements ITaskRepository
           new TaskId(row.id), 
           new TaskTitle( row.title), 
           row.description, 
-          row.status, 
+          new TaskStatus(row.status), 
           new UserId(row.assigneeId)));
-    }
-    async updateStatus(id: string, status: number): Promise<Task> {
-       const repo = AppDataSource.getRepository(TaskEntity);
-       await repo.update({ id }, { status });
-
-       const updated = await repo.findOneBy({ id });
-        if (!updated) {
-            throw new Error(`Task with id ${id} not found`);
-        }
-
-        return new Task(
-            new TaskId(updated.id),
-            new TaskTitle(updated.title),
-            updated.description,
-            updated.status,
-            new UserId(updated.assigneeId) 
-        );
     }
 }
 

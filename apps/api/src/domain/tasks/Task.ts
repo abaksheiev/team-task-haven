@@ -3,6 +3,7 @@ import { TaskId } from "./TaskId";
 import { TaskTitle } from "./TaskTitle";
 import { UserId } from "../teams/UserId";
 import { Comment } from "./Comment";
+import { TaskStatus } from "./TaskStatus";
 //import { Attachment } from "./Attachment";
 //import { DueDate } from "./DueDate";
 
@@ -11,7 +12,7 @@ export class Task {
     private id: TaskId,
     private title: TaskTitle,
     private description: string,
-    private status: number,
+     private _status: TaskStatus,
     private assignee: UserId ,
     //private dueDate?: DueDate,
     private isCompleted: boolean = false,
@@ -19,7 +20,9 @@ export class Task {
     //private attachments: Attachment[] = []
   ) {}
 
-  
+    get status(): TaskStatus {
+    return this._status;
+   }
 
   addComment(comment: Comment) {
     this.comments.push(comment);
@@ -30,11 +33,7 @@ export class Task {
     this.isCompleted = true;
     // Emit domain event TaskCompleted
   }
-/*
-  isOverdue(currentDate: Date): boolean {
-    return this.dueDate ? this.dueDate.isBefore(currentDate) : false;
-  }
-*/
+
   getId(): TaskId {
     return this.id;
   }
@@ -47,24 +46,24 @@ export class Task {
     return this.description
   }
 
-  getStatus(): string {
-    const statusNum = Number(this.status);
+ 
+  changeStatus(newStatus: TaskStatus): void {
+    if (this._status.equals(newStatus)) return;
 
-    switch (statusNum) {
-      case 1:
-        return "Todo";
-      case 2:
-        return "In Progress";
-      case 3:
-        return "In Review";
-      case 4:
-        return "Done";
-      default:
-        return "";
+    // ✅ Правило переходов
+    const allowedTransitions: Record<string, string[]> = {
+      todo: ["in_progress", "cancelled"],
+      in_progress: ["done", "cancelled"],
+      done: [],
+      cancelled: []
+    };
+
+    if (!allowedTransitions[this._status.value]?.includes(newStatus.value)) {
+      throw new Error(
+        `Cannot change status from "${this._status.value}" to "${newStatus.value}"`
+      );
     }
-  }
 
-  getStatusValue():number{
-    return this.status
+    this._status = newStatus;
   }
 }

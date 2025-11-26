@@ -11,7 +11,7 @@ export class TaskMapper {
             id: `${task.getId().getValue()}` ,
             title: task.getTitle(),
             description: task.getDescription(),
-            status: task.getStatus()
+            status: task.status.value
         };
     }
 

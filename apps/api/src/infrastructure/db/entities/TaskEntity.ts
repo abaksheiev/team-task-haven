@@ -14,8 +14,8 @@ export class TaskEntity {
   @Column("varchar", { nullable: true })
   duedate?: string;
 
-  @Column("numeric", { nullable: false })
-  status: number = 0;
+  @Column("varchar", { nullable: false })
+  status: string = "new";
 
   @Column("uuid", { name: "assigneeid", nullable: true })
   assigneeId: string | null = null;
