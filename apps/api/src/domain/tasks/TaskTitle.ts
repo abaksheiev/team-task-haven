@@ -1,11 +1,16 @@
-// src/domain/tasks/TaskTitle.ts
 export class TaskTitle {
-  constructor(private readonly value: string) {
-    if (!value || value.length < 3) {
-      throw new Error("Task title must be >= 3 characters");
+  constructor(public readonly value: string) {
+    const trimmed = value.trim();
+    if (!trimmed) {
+      throw new Error("TaskTitle cannot be empty");
     }
+    if (trimmed.length > 255) {
+      throw new Error("TaskTitle cannot exceed 255 characters");
+    }
+    this.value = trimmed;
   }
-  toString(): string {
-    return this.value;
+
+  equals(other: TaskTitle): boolean {
+    return this.value === other.value;
   }
 }

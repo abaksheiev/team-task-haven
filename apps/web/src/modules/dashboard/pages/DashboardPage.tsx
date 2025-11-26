@@ -3,10 +3,10 @@ import TaskCard from "../components/TaskCard";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
 const columns = [
-  { key: "Todo", title: "To Do" },
-  { key: "In Progress", title: "In Progress" },
-  { key: "In Review", title: "In Review" },
-  { key: "Done", title: "Done" }
+  { key: "todo", title: "To Do" },
+  { key: "in_progress", title: "In Progress" },
+  { key: "in_review", title: "In Review" },
+  { key: "done", title: "Done" }
 ];
 
 export default function DashboardPage() {

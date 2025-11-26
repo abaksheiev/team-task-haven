@@ -2,68 +2,26 @@
 import { TaskId } from "./TaskId";
 import { TaskTitle } from "./TaskTitle";
 import { UserId } from "../teams/UserId";
-import { Comment } from "./Comment";
 import { TaskStatus } from "./TaskStatus";
-//import { Attachment } from "./Attachment";
-//import { DueDate } from "./DueDate";
+import { Priority } from "./Priority";
 
 export class Task {
-  constructor(
-    private id: TaskId,
-    private title: TaskTitle,
-    private description: string,
-     private _status: TaskStatus,
-    private assignee: UserId ,
-    //private dueDate?: DueDate,
-    private isCompleted: boolean = false,
-    private comments: Comment[] = [],
-    //private attachments: Attachment[] = []
+constructor(
+    public readonly id: TaskId,
+    public title: TaskTitle,
+    public description: string,
+    public status: TaskStatus,
+    public readonly assigneeId?: UserId,
+    public readonly priority?: Priority,
   ) {}
 
-    get status(): TaskStatus {
-    return this._status;
-   }
+ changeStatus(newStatus: TaskStatus): void {
+    if (this.status.equals(newStatus)) return;
 
-  addComment(comment: Comment) {
-    this.comments.push(comment);
-  }
-
-  complete() {
-    if (this.isCompleted) throw new Error("Already completed");
-    this.isCompleted = true;
-    // Emit domain event TaskCompleted
-  }
-
-  getId(): TaskId {
-    return this.id;
-  }
-
-  getTitle():string{
-    return this.title.toString()
-  }
-
-  getDescription():string{
-    return this.description
-  }
-
- 
-  changeStatus(newStatus: TaskStatus): void {
-    if (this._status.equals(newStatus)) return;
-
-    // ✅ Правило переходов
-    const allowedTransitions: Record<string, string[]> = {
-      todo: ["in_progress", "cancelled"],
-      in_progress: ["done", "cancelled"],
-      done: [],
-      cancelled: []
-    };
-
-    if (!allowedTransitions[this._status.value]?.includes(newStatus.value)) {
-      throw new Error(
-        `Cannot change status from "${this._status.value}" to "${newStatus.value}"`
-      );
+    if (!TaskStatus.canTransition(this.status, newStatus)) {
+      throw new Error(`Cannot change status from ${this.status.value} to ${newStatus.value}`);
     }
 
-    this._status = newStatus;
+    this.status = newStatus;
   }
 }

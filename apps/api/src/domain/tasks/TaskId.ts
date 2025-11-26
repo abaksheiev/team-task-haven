@@ -1,15 +1,9 @@
 export class TaskId{
-    constructor(private readonly value:string|null){}
-    /**
-     * Get the raw primitive value (number) for this ID.
-     */
-    getValue(): string | null {
+    constructor(public readonly value:string){}
+    getValue(): string {
         return this.value;
     }
 
-    /**
-     * Check if two UserIds are equal.
-     */
     equals(other: TaskId): boolean {
         return this.value === other.value;
     }

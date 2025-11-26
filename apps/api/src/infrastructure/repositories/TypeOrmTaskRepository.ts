@@ -23,17 +23,16 @@ export class TypeOrmTaskRepository implements ITaskRepository
             new TaskId(row.id),
             new TaskTitle(row.title),
             row.description,
-            new TaskStatus(row.status),
-            new UserId(row.assigneeId) 
+            TaskStatus.fromString(row.status)
         );
     }
     
      async save(task: Task): Promise<void> {
         const repo = AppDataSource.getRepository(TaskEntity);
         const entity = repo.create({
-            id: task.getId().getValue()?.toString(),
-            title: task.getTitle(),
-            description: task.getDescription(),
+            id: task.id.value,
+            title: task.title.value,
+            description: task.description,
             status: task.status.value 
         });
         await repo.save(entity);
@@ -45,9 +44,9 @@ export class TypeOrmTaskRepository implements ITaskRepository
           new TaskId(row.id), 
           new TaskTitle( row.title), 
           row.description, 
-          new TaskStatus(row.status), 
-          new UserId(row.assigneeId)));
-    }
+          TaskStatus.fromString(row.status)
+        ))
+    };
 }
 
  

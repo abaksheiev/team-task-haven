@@ -8,9 +8,9 @@ import { TaskDto } from "../dtos/TaskDto";
 export class TaskMapper {
     static toDto(task: Task): TaskDto {
         return {
-            id: `${task.getId().getValue()}` ,
-            title: task.getTitle(),
-            description: task.getDescription(),
+            id: `${task.id.value}` ,
+            title: task.title.value,
+            description: task.description,
             status: task.status.value
         };
     }
