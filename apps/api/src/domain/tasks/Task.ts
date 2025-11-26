@@ -63,4 +63,8 @@ export class Task {
         return "";
     }
   }
+
+  getStatusValue():number{
+    return this.status
+  }
 }

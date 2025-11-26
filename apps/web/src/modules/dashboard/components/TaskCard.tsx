@@ -11,11 +11,13 @@ export default function TaskCard(props: TaskCardProps){
         <div
               key={task.id}
               style={{
-                backgroundColor: "white",
-                padding: "8px",
-                marginBottom: "8px",
-                borderRadius: "4px",
-                boxShadow: "0 0 4px rgba(0,0,0,0.1)"
+                  width: "100%",  
+                  backgroundColor: "white",
+                  padding: "8px",
+                  marginBottom: "8px",
+                  borderRadius: "4px",
+                  boxShadow: "0 0 4px rgba(0,0,0,0.1)",
+                  boxSizing: "border-box"  
               }}
             >
               <strong>{task.title}</strong>

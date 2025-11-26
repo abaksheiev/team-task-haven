@@ -12,4 +12,8 @@ export class TaskService implements ITaskService {
   async getAllTasks(): Promise<Task[]> {
     return await this.taskRepo.findAll();
   }
+
+   async updateTaskStatus(id: string, status: number): Promise<Task> {
+    return await this.taskRepo.updateStatus(id, status);
+  }
 }

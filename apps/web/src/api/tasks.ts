@@ -1,5 +1,5 @@
 //  # все endpoints по задачам
-import { apiGet, apiPost, apiPut, apiDelete } from "./client";
+import { apiGet, apiPost, apiPut, apiDelete, apiPatch } from "./client";
 import type { Task } from "../modules/tasks/types";
 
 export async function getTasks(): Promise<Task[]> {
@@ -21,6 +21,11 @@ export async function updateTask(id: string, task: Partial<Task>): Promise<Task>
 
 export async function deleteTask(id: string): Promise<void> {
   return apiDelete(`/tasks/${id}`);
+}
+
+export async function changeTaskStatus(id:string, status:string): Promise<Task> {
+  console.log("api")
+   return apiPatch<Task>(`/tasks/${id}`, { status: status });
 }
 
 

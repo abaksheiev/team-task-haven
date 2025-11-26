@@ -11,18 +11,59 @@ import { ITaskRepository } from "../../domain/tasks/ITaskRepository";
 @injectable()
 export class TypeOrmTaskRepository implements ITaskRepository 
 {
-    findById(id: TaskId): Promise<Task | null> {
-      throw new Error("Method not implemented.");
+    async findById(id: TaskId): Promise<Task | null> {
+        const row = await AppDataSource.getRepository(TaskEntity).findOneBy({
+            id: id.getValue()?.toString()
+        });
+
+        if (!row) return null;
+
+        return new Task(
+            new TaskId(row.id),
+            new TaskTitle(row.title),
+            row.description,
+            row.status,
+            new UserId(row.assigneeId) 
+        );
     }
     
-    save(task: Task): Promise<void> {
-      throw new Error("Method not implemented.");
+     async save(task: Task): Promise<void> {
+        const repo = AppDataSource.getRepository(TaskEntity);
+        const entity = repo.create({
+            id: task.getId().getValue()?.toString(),
+            title: task.getTitle(),
+            description: task.getDescription(),
+            status: task.getStatusValue() 
+        });
+        await repo.save(entity);
     } 
 
     async findAll(): Promise<Task[]> {
         const rows = await AppDataSource.getRepository(TaskEntity).find();
-        return rows.map(row => new Task(new TaskId(row.id), new TaskTitle( row.title), row.description, row.status, new UserId(row.assigneeId)));
-  }
+        return rows.map(row => new Task(
+          new TaskId(row.id), 
+          new TaskTitle( row.title), 
+          row.description, 
+          row.status, 
+          new UserId(row.assigneeId)));
+    }
+    async updateStatus(id: string, status: number): Promise<Task> {
+       const repo = AppDataSource.getRepository(TaskEntity);
+       await repo.update({ id }, { status });
+
+       const updated = await repo.findOneBy({ id });
+        if (!updated) {
+            throw new Error(`Task with id ${id} not found`);
+        }
+
+        return new Task(
+            new TaskId(updated.id),
+            new TaskTitle(updated.title),
+            updated.description,
+            updated.status,
+            new UserId(updated.assigneeId) 
+        );
+    }
 }
 
  
