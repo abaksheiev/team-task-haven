@@ -25,27 +25,20 @@ Features:
 - Domain-Driven Design (DDD)
 - Value Objects, Entities, Repositories, Services
 
+## Features
+- Create, delete, edit tasks
+- Drag & Drop tasks between columns
+- Persist status changes in the database
+- DDD separation into Domain, Application, Infrastructure, Presentation
+- Value Objects for safe domain modeling
+
+## Live Demo (Vercel + Render)
+[View Online](https://your-kanban-demo.com)
+
 ## Installation & Run
 
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/abaksheiev/team-task-haven.git
 cd team-task-haven
-```
-
-***API Documentation***
-
-**GET /api/tasks**
-
-Returns all tasks from the system.
-```
-[
-  {
-    "id": "38ed90b5-4132-477f-83a3-778937c081b1",
-    "title": "Create tests",
-    "description": "Add unit tests for user service",
-    "status": "todo",
-    "assigneeId": "user-uuid"
-  }
-]
 ```
