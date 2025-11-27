@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "pnpm exec turbo run dev --parallel",
     "dev:api": "pnpm --filter api dev",
+    "test:api": "pnpm --filter api test",
     "dev:web": "pnpm --filter web dev",
     "dev:all": "pnpm exec turbo run dev --filter=api,web",
     "build": "pnpm exec turbo run build",
