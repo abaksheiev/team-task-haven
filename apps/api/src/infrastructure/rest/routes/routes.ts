@@ -1,13 +1,11 @@
 import "reflect-metadata";  // <- обязательно первой строкой
 
-import express from "express";
+import { Router } from "express";
 import { container } from "tsyringe";
 import { UserController } from "../UserController";
 import { TaskController } from "../TaskController";
 
-const router = express.Router();
-const userController = container.resolve(UserController);
-const taskController = container.resolve(TaskController);
+const router = Router();
 
 /**
  * @openapi
@@ -18,7 +16,10 @@ const taskController = container.resolve(TaskController);
  *       200:
  *         description: A list of users
  */
-router.get("/api/users", (req, res) => userController.getAllUsers(req, res));
+router.get("/api/users", (req, res) => {
+  const userController = container.resolve(UserController);
+  return userController.getAllUsers(req, res);
+});
 
 /**
  * @openapi
@@ -29,7 +30,11 @@ router.get("/api/users", (req, res) => userController.getAllUsers(req, res));
  *       200:
  *         description: A list of taks
  */
-router.get("/api/tasks", (req, res) => taskController.getAllTasks(req, res));
+router.get("/api/tasks", (req, res) => {
+  const userController = container.resolve(TaskController);
+  return userController.getAllTasks(req, res);
+});
+
 
 /**
  * @openapi
@@ -57,6 +62,10 @@ router.get("/api/tasks", (req, res) => taskController.getAllTasks(req, res));
  *       200:
  *         description: Updated task
  */
-router.patch("/api/tasks/:id", (req, res) => taskController.updateTaskStatus(req, res));
+router.patch("/api/tasks/:id", (req, res) => {
+  const userController = container.resolve(TaskController);
+  return userController.updateTaskStatus(req, res);
+});
 
-export default router;
+
+ export {router} 
