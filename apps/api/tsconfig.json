@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "types": ["jest"],
     "target": "ES2020",
     "module": "CommonJS",
     "moduleResolution": "node",
@@ -11,5 +12,6 @@
     "experimentalDecorators": true,    
     "emitDecoratorMetadata": true,     
     "skipLibCheck": true
-  }
+  },
+  "include": ["src/**/*.ts", "tests/**/*.test.ts"]
 }
