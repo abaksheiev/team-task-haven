@@ -1,6 +1,6 @@
 # Kanban Task Manager
 
-A Kanban board for task management with drag-and-drop functionality, built using **React**, **react-beautiful-dnd**, and a **Node.js/Express** backend implementing **Domain-Driven Design (DDD)** with **TypeORM**.
+A Kanban board for task management with drag-and-drop functionality, built using **React**, **react-beautiful-dnd**, and a **Node.js/Express** backend implementing **Domain-Driven Design (DDD)** with **TypeORM**.!
 
 Features:
 - Create, delete, edit tasks
