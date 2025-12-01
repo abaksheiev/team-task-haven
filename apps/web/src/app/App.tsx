@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, NavLink} from 'react-router';
 import DashboardPage from '../modules/dashboard/pages/DashboardPage';
 import ProfilePage from '../modules/profile/pages/ProfilePage';
-import TaskDetailsPage from '../modules/tasks/pages/TaskDetailsPage';
+import TaskDetailsPage from '../modules/tasks/pages/TaskEditForm';
 import TaskListPage from '../modules/tasks/pages/TaskListPage';
 
 function App() {

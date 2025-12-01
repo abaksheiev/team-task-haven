@@ -37,4 +37,19 @@ export class TaskController {
       res.status(500).json({ error: "Internal Server Error" });
     }
   }
+
+  async updateTask(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const { description } = req.body;
+      const { title } = req.body;
+      
+      const updatedTask = await this.taskService.updateTask(id, title, description);
+
+      res.json(TaskMapper.toDto(updatedTask));
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  }
 }

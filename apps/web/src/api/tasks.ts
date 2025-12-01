@@ -27,5 +27,3 @@ export async function changeTaskStatus(id:string, status:string): Promise<Task> 
   console.log("api")
    return apiPatch<Task>(`/tasks/${id}`, { status: status });
 }
-
-

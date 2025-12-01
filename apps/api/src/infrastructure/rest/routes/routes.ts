@@ -67,5 +67,9 @@ router.patch("/api/tasks/:id", (req, res) => {
   return userController.updateTaskStatus(req, res);
 });
 
+router.put("/api/tasks/:id", (req, res) => {
+  const userController = container.resolve(TaskController);
+  return userController.updateTask(req, res);
+});
 
  export {router} 

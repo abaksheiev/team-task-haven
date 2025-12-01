@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { getTasks, changeTaskStatus } from "../../../api/tasks";
+import { getTasks, changeTaskStatus, updateTask } from "../../../api/tasks";
 import type { Task } from "../../tasks/types";
 
 export function useTasksByStatus() {
@@ -29,7 +29,7 @@ export function useTasksByStatus() {
     }
   }, []);
 
-  async function updateTaskStatus(id: string, status: string)  {
+  async function updateTaskStatus(id: string, status: string) {
     try {
       setLoading(true);
       setError(null);
@@ -39,7 +39,19 @@ export function useTasksByStatus() {
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  const updateTaskInstance = useCallback(async (task: Task) => {
+    try {
+      setLoading(true);
+      setError(null);
+      await updateTask(task.id, task);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Unknown error");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     fetchTasks();
@@ -51,5 +63,7 @@ export function useTasksByStatus() {
     error,
     refresh: fetchTasks,
     updateTaskStatus,
+    updateTask: updateTaskInstance,
   };
 }
+export { updateTask };
